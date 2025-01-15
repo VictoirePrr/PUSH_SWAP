@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:28:17 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/14 16:24:52 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/15 17:50:05 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,15 @@ int					main(int argc, char **argv);
 
 // sort_the_list
 void				sort_the_list(t_stack **stack);
-void				update_stack_a(int min, t_stack **stack_a);
+void				rotate_next(t_stack **stack, char c);
+int					search_smallest(t_stack **stack);
+void				push_into_stack(t_stack **stack, char c);
 
 // utils
 void				print_error(void);
 void				rot_lstadd_back(t_stack *stack, t_stack *new);
 void				fill_the_list(int argv, t_stack **stack);
+void				rm_node(t_stack **stack);
 t_stack				*stack_init(int content);
 
 #endif

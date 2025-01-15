@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:41:16 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/14 16:58:50 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/15 17:56:29 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,25 @@ void	print_error(void)
 
 void	rot_lstadd_back(t_stack *stack, t_stack *new)
 {
-	t_stack	*head;
 	t_stack	*last;
 
-	head = stack;
-	last = stack;
 	if (!(new))
 		return ;
 	if (!(stack))
 	{
-		head = stack;
-		head->next = stack;
-		head->prev = stack;
+		stack = new;
+		new->next = stack;
+		new->prev = stack;
 	}
-	head = stack;
-	last = head->prev;
-	new->prev = last;
-	new->next = stack;
-	last->next = new;
-	head->prev = new; // Start at the head of the list
-						// Link the new node back to the head
+	else
+	{
+		last = stack->prev;
+		new->prev = last;
+		new->next = stack;
+		last->next = new;
+		stack->prev = new;
+	} // Start at the head of the list
+		// Link the new node back to the head
 }
 
 t_stack	*stack_init(int content)
@@ -70,8 +69,17 @@ void	fill_the_list(int argv, t_stack **stack)
 	else
 		rot_lstadd_back(*stack, new_node);
 }
-nnnn arrive dans la troupe.last = head->prev;
-nnnn->prev = last;
-nnnn->next = head;
-last->next = nnnn;
-head->prev = nnnn;
+
+void	rm_node(t_stack **stack)
+{
+	t_stack *last;
+	if ((*stack)->next == *stack)
+		*stack = NULL; // update stack_a if only one node
+	else
+	{ // update stack_a if multiple node
+		last = (*stack)->prev;
+		*stack = (*stack)->next;
+		(*stack)->prev = last;
+		last->next = *stack;
+	}
+}

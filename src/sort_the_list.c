@@ -6,53 +6,69 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:05:04 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/14 16:03:18 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/15 18:04:19 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void update_stack_a(int min, t_stack **stack_a)
+void	rotate_next(t_stack **stack, char c)
 {
-	t_stack *temp;
-
-	temp = *stack_a;
-	if (!*stack_a)
-		return ;
-	while (temp->next != *stack_a)
-	{
-		if (temp->content == min)
-		{
-			printf("ra\n");
-			temp->prev = temp->next;
-		}
-	}
+	if (*stack && *stack != (*stack)->next)
+		*stack = (*stack)->next;
+	if (c != 'c')
+		ft_printf("r%c\n", c);
+	else
+		ft_printf("rrr\n");
 }
 
 void	sort_the_list(t_stack **stack_a)
 {
-	t_stack *temp;
-	t_stack *stack_b;
-	int min;
+	int	min;
 
-	temp = *stack_a;
-	min = temp->content;
-	stack_b = NULL;
 	if (!*stack_a)
 		return ;
-	printf("\n");
-	printf("%d", min);
+	while (*stack_a)
+	{
+		min = search_smallest(stack_a);
+		while (min != (*stack_a)->content)
+			rotate_next(stack_a, 'a');
+		push_into_stack(stack_a, 'b');
+	}
+	*stack_a = (*stack_a)->next;
+}
+
+int	search_smallest(t_stack **stack)
+{
+	int		min;
+	t_stack	*temp;
+
+	temp = *stack;
+	min = temp->content;
 	while (1)
 	{
-		if (min > temp->next->content)
-		{
-			printf("min : %d", min);
-			min = temp->next->content;
-			update_stack_a(min, &stack_a);
-			fill_the_list(min, &stack_b);
-		}
+		if (temp->content < min)
+			min = temp->content;
 		temp = temp->next;
-		if (temp == *stack_a) // Stop when we loop back to the head
+		if (temp == *stack)
 			break ;
 	}
+	return (min);
+}
+
+void	push_into_stack(t_stack **stack, char c)
+{
+	t_stack	*second_stack;
+	t_stack	*swap_value;
+
+	second_stack = NULL;
+	swap_value = *stack;
+	rm_node(stack);
+	if (!second_stack)
+	{
+		swap_value->next = NULL;
+		swap_value->prev = NULL;
+	}
+	rot_lstadd_back(second_stack, swap_value); // fill stack_b
+	ft_printf("p%c\n", c);
 }
