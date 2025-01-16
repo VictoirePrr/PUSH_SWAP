@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:05:04 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/15 18:04:19 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/16 16:22:42 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	rotate_next(t_stack **stack, char c)
 		ft_printf("rrr\n");
 }
 
-void	sort_the_list(t_stack **stack_a)
+void	sort_the_list(t_stack **stack_a, t_stack **stack_b)
 {
 	int	min;
 
@@ -33,9 +33,10 @@ void	sort_the_list(t_stack **stack_a)
 		min = search_smallest(stack_a);
 		while (min != (*stack_a)->content)
 			rotate_next(stack_a, 'a');
-		push_into_stack(stack_a, 'b');
+		push_into_stack(stack_a, stack_b, 'b');
 	}
-	*stack_a = (*stack_a)->next;
+	while (*stack_b)
+		push_into_stack(stack_b, stack_a, 'a');
 }
 
 int	search_smallest(t_stack **stack)
@@ -56,19 +57,17 @@ int	search_smallest(t_stack **stack)
 	return (min);
 }
 
-void	push_into_stack(t_stack **stack, char c)
+void	push_into_stack(t_stack **src, t_stack **dst, char c)
 {
-	t_stack	*second_stack;
 	t_stack	*swap_value;
 
-	second_stack = NULL;
-	swap_value = *stack;
-	rm_node(stack);
-	if (!second_stack)
+	swap_value = *src;
+	rm_node(src);
+	if (!*dst)
 	{
-		swap_value->next = NULL;
-		swap_value->prev = NULL;
+		swap_value->next = swap_value;
+		swap_value->prev = swap_value;
 	}
-	rot_lstadd_back(second_stack, swap_value); // fill stack_b
+	rot_lstadd_back(dst, swap_value);
 	ft_printf("p%c\n", c);
 }

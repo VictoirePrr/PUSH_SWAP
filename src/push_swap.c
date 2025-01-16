@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:30:18 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/14 15:48:15 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/16 11:07:27 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,21 @@
 int	main(int argc, char **argv)
 {
 	int i;
-	t_stack *stack;
+	t_stack *stack_a;
+	t_stack *stack_b;
+	
 
 	i = 1;
-	stack = NULL; // init the stack before the first node
+	stack_a = NULL;
+	stack_b = NULL; // init the stack before the first node
 	if (argc > 2)
 	{
 		while (i < argc)
 		{
-			fill_the_list(atoi(argv[i]), &stack);
+			fill_the_list(atoi(argv[i]), &stack_a);
 			i++;
 		}
-		sort_the_list(&stack);
+		sort_the_list(&stack_a, &stack_b);
 	}
 	else
 		print_error();

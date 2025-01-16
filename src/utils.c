@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:41:16 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/15 17:56:29 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/16 12:34:45 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,26 @@ void	print_error(void)
 	ft_printf("Error\n");
 }
 
-void	rot_lstadd_back(t_stack *stack, t_stack *new)
+void	rot_lstadd_back(t_stack **stack, t_stack *new_node)
 {
 	t_stack	*last;
 
-	if (!(new))
+	if (!new_node)
 		return ;
-	if (!(stack))
+	if (!*stack)
 	{
-		stack = new;
-		new->next = stack;
-		new->prev = stack;
+		*stack = new_node;
+		new_node->next = new_node;
+		new_node->prev = new_node;
 	}
 	else
 	{
-		last = stack->prev;
-		new->prev = last;
-		new->next = stack;
-		last->next = new;
-		stack->prev = new;
-	} // Start at the head of the list
-		// Link the new node back to the head
+		last = (*stack)->prev;
+		last->next = new_node;
+		new_node->prev = last;
+		new_node->next = *stack;
+		(*stack)->prev = new_node;
+	}
 }
 
 t_stack	*stack_init(int content)
@@ -60,26 +59,32 @@ void	fill_the_list(int argv, t_stack **stack)
 	new_node = stack_init(argv);
 	if (!new_node)
 		return ;
-	printf("%d\n", new_node->content);
 	if (!*stack)
 	{
 		*stack = new_node;
 		new_node->next = new_node;
+		new_node->prev = new_node;
 	}
 	else
-		rot_lstadd_back(*stack, new_node);
+		rot_lstadd_back(stack, new_node);
 }
 
+// Removes the current node from a circular doubly linked list.
+// If the list becomes empty, sets the stack to NULL.
 void	rm_node(t_stack **stack)
 {
-	t_stack *last;
-	if ((*stack)->next == *stack)
-		*stack = NULL; // update stack_a if only one node
+	t_stack	*node_to_remove;
+
+	if (!*stack)
+		return ;
+	node_to_remove = *stack;
+	// If removing the only element in the stack
+	if (node_to_remove->next == node_to_remove)
+		*stack = NULL;
 	else
-	{ // update stack_a if multiple node
-		last = (*stack)->prev;
-		*stack = (*stack)->next;
-		(*stack)->prev = last;
-		last->next = *stack;
+	{
+		node_to_remove->prev->next = node_to_remove->next;
+		node_to_remove->next->prev = node_to_remove->prev;
+		*stack = node_to_remove->next;
 	}
 }
