@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:30:18 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/17 16:06:16 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/20 11:06:06 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	main(int argc, char **argv)
 	int i;
 	t_stack *stack_a;
 	t_stack *stack_b;
-	
 
 	i = 1;
 	stack_a = NULL;
@@ -30,10 +29,12 @@ int	main(int argc, char **argv)
 	{
 		while (i < argc)
 		{
-			fill_the_list(atoi(argv[i]), argc, &stack_a);
+			fill_the_list(atoi(argv[i]), &stack_a);
 			i++;
 		}
 		sort_the_list(&stack_a, &stack_b);
+		ft_print_list(&stack_a);
+		printf("The list is sorted ! Nice werk honey <3\n");
 	}
 	else
 		print_error();

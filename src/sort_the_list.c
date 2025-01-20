@@ -2,35 +2,15 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   sort_the_list.c                                    :+:      :+:    :+:   */
-	/*                                                    +:+ +:+         +:+     */
+/*                                                    +:+ +:+         +:+     */
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:05:04 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/17 16:11:54 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/20 17:00:35 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	rotate_next(t_stack **stack, char c)
-{
-	if (*stack && *stack != (*stack)->next)
-		*stack = (*stack)->next;
-	if (c != 'c')
-		ft_printf("r%c\n", c);
-	else
-		ft_printf("rr\n");
-}
-
-void	rotate_prev(t_stack **stack, char c)
-{
-	if (*stack && *stack != (*stack)->prev)
-		*stack = (*stack)->prev;
-	if (c != 'c')
-		ft_printf("rr%c\n", c);
-	else
-		ft_printf("rrr\n");
-}
 
 void	sort_the_list(t_stack **stack_a, t_stack **stack_b)
 {
@@ -38,53 +18,55 @@ void	sort_the_list(t_stack **stack_a, t_stack **stack_b)
 
 	if (!*stack_a)
 		return ;
-	if ((*stack_a)->size == 3)
+	if (size_of_list(stack_a) == 3)
 		sort_three(stack_a);
 	else
 	{
-		while (*stack_a)
+		while (size_of_list(stack_a) != 3)
 		{
-			min = search_smallest(stack_a);
-			while (min != (*stack_a)->content)
-				rotate_next(stack_a, 'a');
+			search_smallest(stack_a);
+			search_best_instruct(stack_a);
 			push_into_stack(stack_a, stack_b, 'b');
 		}
+		if (size_of_list(stack_a) == 3)
+			sort_three(stack_a);
 		while (*stack_b)
 			push_into_stack(stack_b, stack_a, 'a');
 	}
 }
-
-int	search_smallest(t_stack **stack)
+void	search_smallest(t_stack **stack)
 {
-	int		min;
+	t_node	*node;
 	t_stack	*temp;
 
 	temp = *stack;
-	min = temp->content;
+	(*stack)->node.min = temp->content;
+	(*stack)->node.pos = 0;
 	while (1)
 	{
-		if (temp->content < min)
-			min = temp->content;
+		if (temp->content < (*stack)->node.min)
+			(*stack)->node.min = temp->content;
 		temp = temp->next;
+		(*stack)->node.pos++;
 		if (temp == *stack)
 			break ;
 	}
-	return (min);
 }
 
-void	push_into_stack(t_stack **src, t_stack **dst, char c)
+void	search_best_instruct(t_stack **stack)
 {
-	t_stack	*swap_value;
+	int	len;
 
-	swap_value = *src;
-	rm_node(src);
-	if (!*dst)
+	len = size_of_list(stack);
+	while ((*stack)->content != (*stack)->node.min)
 	{
-		swap_value->next = swap_value;
-		swap_value->prev = swap_value;
+		ft_print_list(stack);
+		printf("min : %d\n", (*stack)->node.min);
+		// if ((*stack)->node.pos > len / 2)
+		// 	rotate_prev(stack, 'a');
+		// else
+		rotate_next(stack, 'a');
 	}
-	rot_lstadd_back(dst, swap_value);
-	ft_printf("p%c\n", c);
 }
 
 // 5 possibilite
@@ -94,28 +76,22 @@ void	sort_three(t_stack **stack_a)
 	int	middle;
 	int	last;
 
-	head = (*stack_a)->content;
-	middle = (*stack_a)->next->content;
-	last = (*stack_a)->prev->content;
 	while (1)
 	{
-		// 1 2 3
+		head = (*stack_a)->content;
+		middle = (*stack_a)->next->content;
+		last = (*stack_a)->prev->content;
 		if (head < middle && middle < last && last > head)
 			break ;
-		//  1 3 2
-		if (head < middle && middle > last && last > head)
+		else if (head < middle && middle > last && last > head)
 			rotate_prev(stack_a, 'a');
-		// 2 3 1
-		if (head < middle && middle > last && last < head)
+		else if (head < middle && middle > last && last < head)
 			rotate_prev(stack_a, 'a');
-		// 2 1 3
-		if (head > middle && middle > last && last > head)
-			rotate_next(stack_a, 'a');
-		// 3 2 1
-		if (head > middle && middle > last && last < head)
-			rotate_next(stack_a, 'a');
-		// 3 1 2
-		if (head > middle && middle < last && last < head)
+		else if (head > middle && middle < last && last > head)
+			ft_swap(stack_a, 'a');
+		else if (head > middle && middle > last && last < head)
+			ft_swap(stack_a, 'a');
+		else if (head > middle && middle < last && last < head)
 			rotate_next(stack_a, 'a');
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:41:16 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/17 16:08:15 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/20 12:45:25 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,59 +15,6 @@
 void	print_error(void)
 {
 	ft_printf("Error\n");
-}
-
-void	rot_lstadd_back(t_stack **stack, t_stack *new_node)
-{
-	t_stack	*last;
-
-	if (!new_node)
-		return ;
-	if (!*stack)
-	{
-		*stack = new_node;
-		new_node->next = new_node;
-		new_node->prev = new_node;
-	}
-	else
-	{
-		last = (*stack)->prev;
-		last->next = new_node;
-		new_node->prev = last;
-		new_node->next = *stack;
-		(*stack)->prev = new_node;
-	}
-}
-
-t_stack	*stack_init(int content, int argc)
-{
-	t_stack	*new_node;
-
-	new_node = (t_stack *)malloc(sizeof(t_stack));
-	if (!(new_node))
-		return (NULL);
-	new_node->content = content;
-	new_node->size = argc - 1;
-	new_node->next = NULL;
-	new_node->prev = NULL;
-	return (new_node);
-}
-
-void	fill_the_list(int argv, int argc, t_stack **stack)
-{
-	t_stack	*new_node;
-
-	new_node = stack_init(argv, argc);
-	if (!new_node)
-		return ;
-	if (!*stack)
-	{
-		*stack = new_node;
-		new_node->next = new_node;
-		new_node->prev = new_node;
-	}
-	else
-		rot_lstadd_back(stack, new_node);
 }
 
 // Removes the current node from a circular doubly linked list.
@@ -87,5 +34,36 @@ void	rm_node(t_stack **stack)
 		node_to_remove->prev->next = node_to_remove->next;
 		node_to_remove->next->prev = node_to_remove->prev;
 		*stack = node_to_remove->next;
+	}
+}
+int	size_of_list(t_stack **stack)
+{
+	t_stack	*temp;
+	int		size;
+
+	temp = *stack;
+	size = 0;
+	while (1)
+	{
+		temp = temp->next;
+		size++;
+		if (temp == *stack)
+			break ;
+	}
+	return (size);
+}
+
+// a supprimer avant de push
+void	ft_print_list(t_stack **stack)
+{
+	t_stack *temp;
+
+	temp = *stack;
+	while (1)
+	{
+		printf("%d\n", temp->content);
+		temp = temp->next;
+		if (temp == *stack)
+			break ;
 	}
 }
