@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:30:18 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/16 11:07:27 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/17 16:06:16 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 	{
 		while (i < argc)
 		{
-			fill_the_list(atoi(argv[i]), &stack_a);
+			fill_the_list(atoi(argv[i]), argc, &stack_a);
 			i++;
 		}
 		sort_the_list(&stack_a, &stack_b);

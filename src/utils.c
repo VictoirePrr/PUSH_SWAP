@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:41:16 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/16 12:34:45 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/17 16:08:15 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	rot_lstadd_back(t_stack **stack, t_stack *new_node)
 	}
 }
 
-t_stack	*stack_init(int content)
+t_stack	*stack_init(int content, int argc)
 {
 	t_stack	*new_node;
 
@@ -47,16 +47,17 @@ t_stack	*stack_init(int content)
 	if (!(new_node))
 		return (NULL);
 	new_node->content = content;
+	new_node->size = argc - 1;
 	new_node->next = NULL;
 	new_node->prev = NULL;
 	return (new_node);
 }
 
-void	fill_the_list(int argv, t_stack **stack)
+void	fill_the_list(int argv, int argc, t_stack **stack)
 {
 	t_stack	*new_node;
 
-	new_node = stack_init(argv);
+	new_node = stack_init(argv, argc);
 	if (!new_node)
 		return ;
 	if (!*stack)

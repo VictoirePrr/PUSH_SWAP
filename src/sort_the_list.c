@@ -2,11 +2,11 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   sort_the_list.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
+	/*                                                    +:+ +:+         +:+     */
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:05:04 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/16 16:22:42 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/17 16:11:54 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ void	rotate_next(t_stack **stack, char c)
 	if (c != 'c')
 		ft_printf("r%c\n", c);
 	else
+		ft_printf("rr\n");
+}
+
+void	rotate_prev(t_stack **stack, char c)
+{
+	if (*stack && *stack != (*stack)->prev)
+		*stack = (*stack)->prev;
+	if (c != 'c')
+		ft_printf("rr%c\n", c);
+	else
 		ft_printf("rrr\n");
 }
 
@@ -28,15 +38,20 @@ void	sort_the_list(t_stack **stack_a, t_stack **stack_b)
 
 	if (!*stack_a)
 		return ;
-	while (*stack_a)
+	if ((*stack_a)->size == 3)
+		sort_three(stack_a);
+	else
 	{
-		min = search_smallest(stack_a);
-		while (min != (*stack_a)->content)
-			rotate_next(stack_a, 'a');
-		push_into_stack(stack_a, stack_b, 'b');
+		while (*stack_a)
+		{
+			min = search_smallest(stack_a);
+			while (min != (*stack_a)->content)
+				rotate_next(stack_a, 'a');
+			push_into_stack(stack_a, stack_b, 'b');
+		}
+		while (*stack_b)
+			push_into_stack(stack_b, stack_a, 'a');
 	}
-	while (*stack_b)
-		push_into_stack(stack_b, stack_a, 'a');
 }
 
 int	search_smallest(t_stack **stack)
@@ -70,4 +85,37 @@ void	push_into_stack(t_stack **src, t_stack **dst, char c)
 	}
 	rot_lstadd_back(dst, swap_value);
 	ft_printf("p%c\n", c);
+}
+
+// 5 possibilite
+void	sort_three(t_stack **stack_a)
+{
+	int	head;
+	int	middle;
+	int	last;
+
+	head = (*stack_a)->content;
+	middle = (*stack_a)->next->content;
+	last = (*stack_a)->prev->content;
+	while (1)
+	{
+		// 1 2 3
+		if (head < middle && middle < last && last > head)
+			break ;
+		//  1 3 2
+		if (head < middle && middle > last && last > head)
+			rotate_prev(stack_a, 'a');
+		// 2 3 1
+		if (head < middle && middle > last && last < head)
+			rotate_prev(stack_a, 'a');
+		// 2 1 3
+		if (head > middle && middle > last && last > head)
+			rotate_next(stack_a, 'a');
+		// 3 2 1
+		if (head > middle && middle > last && last < head)
+			rotate_next(stack_a, 'a');
+		// 3 1 2
+		if (head > middle && middle < last && last < head)
+			rotate_next(stack_a, 'a');
+	}
 }
