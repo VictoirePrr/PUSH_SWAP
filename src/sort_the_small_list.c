@@ -6,16 +6,18 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:05:04 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/20 17:00:35 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/21 14:57:25 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_the_list(t_stack **stack_a, t_stack **stack_b)
+void	sort_the_small_list(t_stack **stack_a, t_stack **stack_b)
 {
-	int	min;
+	t_data	data;
 
+	data.min = 0;
+	data.min_pos = 0;
 	if (!*stack_a)
 		return ;
 	if (size_of_list(stack_a) == 3)
@@ -24,8 +26,9 @@ void	sort_the_list(t_stack **stack_a, t_stack **stack_b)
 	{
 		while (size_of_list(stack_a) != 3)
 		{
-			search_smallest(stack_a);
-			search_best_instruct(stack_a);
+			search_smallest(stack_a, &data);
+			while ((*stack_a)->content != data.min)
+				search_best_instruct(stack_a, &data);
 			push_into_stack(stack_a, stack_b, 'b');
 		}
 		if (size_of_list(stack_a) == 3)
@@ -34,39 +37,37 @@ void	sort_the_list(t_stack **stack_a, t_stack **stack_b)
 			push_into_stack(stack_b, stack_a, 'a');
 	}
 }
-void	search_smallest(t_stack **stack)
+void	search_smallest(t_stack **stack, t_data *data)
 {
-	t_node	*node;
 	t_stack	*temp;
+	int		len;
 
 	temp = *stack;
-	(*stack)->node.min = temp->content;
-	(*stack)->node.pos = 0;
+	data->min = temp->content;
+	len = 0;
 	while (1)
 	{
-		if (temp->content < (*stack)->node.min)
-			(*stack)->node.min = temp->content;
+		if (temp->content < data->min)
+		{
+			data->min = temp->content;
+			data->min_pos = len;
+		}
+		len++;
 		temp = temp->next;
-		(*stack)->node.pos++;
 		if (temp == *stack)
 			break ;
 	}
 }
 
-void	search_best_instruct(t_stack **stack)
+void	search_best_instruct(t_stack **stack, t_data *data)
 {
 	int	len;
 
 	len = size_of_list(stack);
-	while ((*stack)->content != (*stack)->node.min)
-	{
-		ft_print_list(stack);
-		printf("min : %d\n", (*stack)->node.min);
-		// if ((*stack)->node.pos > len / 2)
-		// 	rotate_prev(stack, 'a');
-		// else
+	if (data->min_pos > len / 2)
+		rotate_prev(stack, 'a');
+	else
 		rotate_next(stack, 'a');
-	}
 }
 
 // 5 possibilite

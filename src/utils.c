@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:41:16 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/20 12:45:25 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/21 15:44:29 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,23 @@ int	size_of_list(t_stack **stack)
 			break ;
 	}
 	return (size);
+}
+void	search_sort_index(t_stack **stack, t_stack *temp, t_data *data)
+{
+	int	i;
+	
+	i = 0;
+	(*stack)->index = 0;
+	search_smallest(temp, &data);
+	while (i != data->min_pos)
+	{
+		(*stack)->next;
+		temp->next;
+		i++;
+	}
+	(*stack)->index++;
+	rm_node(temp);
+	search_sort_index(stack, &temp, &data);
 }
 
 // a supprimer avant de push
