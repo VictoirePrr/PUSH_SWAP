@@ -6,7 +6,7 @@
 #    By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/12 12:55:24 by vicperri          #+#    #+#              #
-#    Updated: 2025/01/20 12:47:39 by vicperri         ###   ########lyon.fr    #
+#    Updated: 2025/01/21 14:58:41 by vicperri         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC := gcc
 CCFLAGS := -g3
 SRC_DIR := src/
 INCLUDES:= include/
-SRC := $(addprefix $(SRC_DIR), init_the_list.c instructions.c push_swap.c utils.c sort_the_list.c)
+SRC := $(addprefix $(SRC_DIR), init_the_list.c instructions.c push_swap.c utils.c sort_the_small_list.c sort_the_big_list.c)
 
 OBJ_DIR := .obj/
 OBJ := $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)

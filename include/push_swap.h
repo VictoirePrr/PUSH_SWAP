@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:28:17 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/20 13:43:05 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/21 15:01:55 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@
 # define ERROR 1
 # define SUCCESS 0
 
-typedef struct s_node
+typedef struct s_data
 {
-	int				pos;
+	int				min_pos;
 	int				min;
-}					t_node;
+}					t_data;
 
 typedef struct s_stack
 {
-	t_node			node;
 	int				content;
+	int				index;
 	struct s_stack	*next;
 	struct s_stack	*prev;
 }					t_stack;
@@ -46,11 +46,11 @@ t_stack				*stack_init(int content);
 // push_swap.c
 int					main(int argc, char **argv);
 
-// sort_the_list
-void				sort_the_list(t_stack **stack_a, t_stack **stack_b);
-void				search_best_instruct(t_stack **stack);
+// sort_the_small_list
+void				sort_the_small_list(t_stack **stack_a, t_stack **stack_b);
+void				search_best_instruct(t_stack **stack, t_data *data);
 void				sort_three(t_stack **stack_a);
-void				search_smallest(t_stack **stack);
+void				search_smallest(t_stack **stack, t_data *data);
 
 // instructions
 void				push_into_stack(t_stack **src, t_stack **dst, char c);
@@ -63,5 +63,8 @@ void				print_error(void);
 void				rm_node(t_stack **stack);
 int					size_of_list(t_stack **stack);
 void				ft_print_list(t_stack **stack);
+
+// sort_the_big_list
+void				sort_the_big_list(t_stack **stack_a, t_stack **stack_b);
 
 #endif
