@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:28:17 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/21 15:01:55 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/22 10:55:02 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_data
 {
 	int				min_pos;
 	int				min;
+	int				index;
 }					t_data;
 
 typedef struct s_stack
@@ -50,7 +51,7 @@ int					main(int argc, char **argv);
 void				sort_the_small_list(t_stack **stack_a, t_stack **stack_b);
 void				search_best_instruct(t_stack **stack, t_data *data);
 void				sort_three(t_stack **stack_a);
-void				search_smallest(t_stack **stack, t_data *data);
+void				search_smallest_small_list(t_stack **stack, t_data *data);
 
 // instructions
 void				push_into_stack(t_stack **src, t_stack **dst, char c);
@@ -64,7 +65,13 @@ void				rm_node(t_stack **stack);
 int					size_of_list(t_stack **stack);
 void				ft_print_list(t_stack **stack);
 
+// big_list_utils
+void				search_sort_index(t_stack **stack, t_data *data);
+void				set_index(t_stack **stack);
+int					check_if_node_processed(t_stack **stack);
+
 // sort_the_big_list
 void				sort_the_big_list(t_stack **stack_a, t_stack **stack_b);
+void				search_smallest_big_list(t_stack **stack, t_data *data);
 
 #endif

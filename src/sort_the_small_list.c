@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_the_list.c                                    :+:      :+:    :+:   */
+/*   sort_the_small_list.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:05:04 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/21 14:57:25 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/22 10:27:17 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	sort_the_small_list(t_stack **stack_a, t_stack **stack_b)
 	{
 		while (size_of_list(stack_a) != 3)
 		{
-			search_smallest(stack_a, &data);
+			search_smallest_small_list(stack_a, &data);
 			while ((*stack_a)->content != data.min)
 				search_best_instruct(stack_a, &data);
 			push_into_stack(stack_a, stack_b, 'b');
@@ -37,7 +37,7 @@ void	sort_the_small_list(t_stack **stack_a, t_stack **stack_b)
 			push_into_stack(stack_b, stack_a, 'a');
 	}
 }
-void	search_smallest(t_stack **stack, t_data *data)
+void	search_smallest_small_list(t_stack **stack, t_data *data)
 {
 	t_stack	*temp;
 	int		len;
