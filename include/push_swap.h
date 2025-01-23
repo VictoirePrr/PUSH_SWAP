@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:28:17 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/22 10:55:02 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/23 19:19:55 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include "libft.h"
+#include <limits.h>
 # include <fcntl.h>
 # include <stddef.h>
 # include <stdint.h>
@@ -23,12 +24,15 @@
 
 # define ERROR 1
 # define SUCCESS 0
+# define QUAD 0.000003
+# define MIN_CHUNK 18
 
 typedef struct s_data
 {
 	int				min_pos;
 	int				min;
 	int				index;
+	float			chunk_size;
 }					t_data;
 
 typedef struct s_stack
@@ -62,16 +66,18 @@ void				rotate_prev(t_stack **stack, char c);
 // utils
 void				print_error(void);
 void				rm_node(t_stack **stack);
-int					size_of_list(t_stack **stack);
 void				ft_print_list(t_stack **stack);
+int					size_of_list(t_stack **stack);
 
 // big_list_utils
 void				search_sort_index(t_stack **stack, t_data *data);
 void				set_index(t_stack **stack);
+void				compute_chunks(t_stack **stack, t_data *data);
 int					check_if_node_processed(t_stack **stack);
+void				search_smallest_big_list(t_stack **stack, t_data *data);
 
 // sort_the_big_list
 void				sort_the_big_list(t_stack **stack_a, t_stack **stack_b);
-void				search_smallest_big_list(t_stack **stack, t_data *data);
+void				korean_algo(t_stack **stack, t_stack **stack_b, t_data *data);
 
 #endif
