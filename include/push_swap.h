@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:28:17 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/23 19:19:55 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/24 15:05:13 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define PUSH_SWAP_H
 
 # include "libft.h"
-#include <limits.h>
 # include <fcntl.h>
+# include <limits.h>
 # include <stddef.h>
 # include <stdint.h>
 # include <stdio.h>
@@ -78,6 +78,9 @@ void				search_smallest_big_list(t_stack **stack, t_data *data);
 
 // sort_the_big_list
 void				sort_the_big_list(t_stack **stack_a, t_stack **stack_b);
-void				korean_algo(t_stack **stack, t_stack **stack_b, t_data *data);
-
+void				korean_algo(t_stack **stack, t_stack **stack_b,
+						t_data *data);
+void				push_b_in_a_korean_way(t_stack **stack_a,
+						t_stack **stack_b);
+void				sort_stack_a_korean_way(t_stack **stack_a);
 #endif

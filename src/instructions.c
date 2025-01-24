@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:40:24 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/21 11:45:11 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/24 16:17:32 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_swap(t_stack **stack, char c)
 	int	temp;
 
 	temp = (*stack)->content;
-	(*stack)->content = (*stack)->next->content;
+	(*stack)->content = (*stack)->next->content; // modifier egalement l'index
 	(*stack)->next->content = temp;
 	if (c != 'c')
 		ft_printf("s%c\n", c);
@@ -58,7 +58,7 @@ void	push_into_stack(t_stack **src, t_stack **dst, char c)
 		return ;
 	if (!*dst)
 	{
-		swap_value->next = swap_value;
+		swap_value->next = swap_value; // modifier egalement l'index
 		swap_value->prev = swap_value;
 	}
 	rot_lstadd_back(dst, swap_value);

@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:30:18 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/22 09:41:47 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/24 16:06:56 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,9 @@ int	main(int argc, char **argv)
 		if (size_of_list(&stack_a) <= 12)
 			sort_the_small_list(&stack_a, &stack_b);
 		else
-		{
-			printf("in the big list\n");
 			sort_the_big_list(&stack_a, &stack_b);
-			
-		}
+		// ft_print_list(&stack_a);
+		// printf("sorted !\n");
 	}
 	else
 		print_error();
