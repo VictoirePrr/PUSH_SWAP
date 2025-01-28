@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:41:16 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/24 16:02:55 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/28 16:13:13 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,13 @@ void	print_error(void)
 	ft_printf("Error\n");
 }
 
-// Removes the current node from a circular doubly linked list.
-// If the list becomes empty, sets the stack to NULL.
+/* Goal : Removes the current node from a circular doubly linked list.
+To do so I save my node into a variable node_to_remove.
+If there is only one node in the stack, I set it to NULL.
+Otherwise, I move the head of my stack to the second node, 
+I set the next of the last node to point to the second node,
+and I set the prev of the second node to point to the last node.
+*/
 void	rm_node(t_stack **stack)
 {
 	t_stack	*node_to_remove;
@@ -36,6 +41,7 @@ void	rm_node(t_stack **stack)
 		*stack = node_to_remove->next;
 	}
 }
+/* Pretty self explanatory */
 int	size_of_list(t_stack **stack)
 {
 	t_stack	*temp;
@@ -61,7 +67,7 @@ void	ft_print_list(t_stack **stack)
 	temp = *stack;
 	while (1)
 	{
-		printf("%d\n", temp->index);
+		printf("c : %d || i : %d\n", temp->content, temp->index);
 		temp = temp->next;
 		if (temp == *stack)
 			break ;

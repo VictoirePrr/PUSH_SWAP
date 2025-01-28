@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:28:17 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/24 15:05:13 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/28 15:27:40 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_stack
 
 // init the list
 void				rot_lstadd_back(t_stack **stack, t_stack *new_node);
+void				rot_lstadd_front(t_stack **stack, t_stack *new_node);
 void				fill_the_list(int argv, t_stack **stack);
 t_stack				*stack_init(int content);
 
@@ -80,7 +81,7 @@ void				search_smallest_big_list(t_stack **stack, t_data *data);
 void				sort_the_big_list(t_stack **stack_a, t_stack **stack_b);
 void				korean_algo(t_stack **stack, t_stack **stack_b,
 						t_data *data);
-void				push_b_in_a_korean_way(t_stack **stack_a,
-						t_stack **stack_b);
+void				push_b_in_a_korean_way(t_stack **stack_a, t_stack **stack_b,
+						int size_a);
 void				sort_stack_a_korean_way(t_stack **stack_a);
 #endif
