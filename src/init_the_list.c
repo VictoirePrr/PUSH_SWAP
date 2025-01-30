@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:44:49 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/28 16:24:30 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/29 18:27:45 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	rot_lstadd_front(t_stack **stack, t_stack *new_node)
 		new_node->prev = head->prev; // Connect `new_node->prev` to the tail
 		new_node->next = head;       // Connect `new_node->next` to the head
 		head->prev->next = new_node;
-			// Connect the old tail's `next` to `new_node`
-		head->prev = new_node;       // Connect the head's `prev` to `new_node`
+		// Connect the old tail's `next` to `new_node`
+		head->prev = new_node; // Connect the head's `prev` to `new_node`
 		*stack = new_node;
 	}
 }
@@ -81,19 +81,24 @@ t_stack	*stack_init(int content)
 	return (new_node);
 }
 
-void	fill_the_list(int argv, t_stack **stack)
+int	fill_and_check_the_list(int content, t_stack **stack)
 {
 	t_stack *new_node;
 
-	new_node = stack_init(argv);
+	new_node = stack_init(content);
 	if (!new_node)
-		return ;
+		return (ERROR);
 	if (!*stack)
 	{
 		*stack = new_node;
 		new_node->next = new_node;
-		new_node->prev = new_node;
+		printf("cc");
 	}
 	else
+	{
 		rot_lstadd_back(stack, new_node);
+		if (check_stack(stack) == ERROR)
+			return (ERROR);
+	}
+	return (SUCCESS);
 }

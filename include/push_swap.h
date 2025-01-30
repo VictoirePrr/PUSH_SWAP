@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:28:17 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/28 15:27:40 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/29 18:23:27 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,12 @@ typedef struct s_stack
 // init the list
 void				rot_lstadd_back(t_stack **stack, t_stack *new_node);
 void				rot_lstadd_front(t_stack **stack, t_stack *new_node);
-void				fill_the_list(int argv, t_stack **stack);
+int					fill_and_check_the_list(int content, t_stack **stack);
 t_stack				*stack_init(int content);
 
 // push_swap.c
 int					main(int argc, char **argv);
+int					split_and_list_argv(int argc, char **argv, t_stack **stack);
 
 // sort_the_small_list
 void				sort_the_small_list(t_stack **stack_a, t_stack **stack_b);
@@ -69,6 +70,7 @@ void				print_error(void);
 void				rm_node(t_stack **stack);
 void				ft_print_list(t_stack **stack);
 int					size_of_list(t_stack **stack);
+int					check_stack(t_stack **stack);
 
 // big_list_utils
 void				search_sort_index(t_stack **stack, t_data *data);
