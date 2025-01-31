@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:31:55 by vicperri          #+#    #+#             */
-/*   Updated: 2024/12/11 14:46:30 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/31 10:40:30 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,22 @@
 #  define BUFFER_SIZE 42
 # endif
 
+# include <stdarg.h>
 # include <stdint.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdarg.h>
-
 
 // GET NEXT LINE
-char	*get_next_line(int fd);
+char				*get_next_line(int fd);
 
 // PRINTF
-int	ft_printf(const char *format, ...);
-int	ft_putchar_printf(int c);
-int	ft_putstr_printf(char *str);
-int	ft_putnbr_printf(int n);
-int	ft_unsign_nbr(unsigned int n);
-int	ft_hexa_nbr(unsigned int n, char x);
-int	ft_hexa_void(unsigned long int p);
+int					ft_printf(const char *format, ...);
+int					ft_putchar_printf(int c);
+int					ft_putstr_printf(char *str);
+int					ft_putnbr_printf(int n);
+int					ft_unsign_nbr(unsigned int n);
+int					ft_hexa_nbr(unsigned int n, char x);
+int					ft_hexa_void(unsigned long int p);
 
 // LIBFT
 typedef struct s_list
@@ -68,11 +67,11 @@ void				*ft_memset(void *s, int c, size_t n);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);
-int					ft_isdigit(int c);
+int					ft_isdigit(char *c);
 int					ft_isprint(int c);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
-int					ft_atoi(const char *nptr);
+long				ft_atoi(const char *nptr);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);

@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:40:24 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/28 16:27:05 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/31 13:55:06 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	rotate_next(t_stack **stack, char c)
 		*stack = (*stack)->next;
 	if (c != 'c')
 		ft_printf("r%c\n", c);
-	else
-		ft_printf("rr\n");
 }
 
 void	rotate_prev(t_stack **stack, char c)
@@ -32,11 +30,9 @@ void	rotate_prev(t_stack **stack, char c)
 		*stack = (*stack)->prev;
 	if (c != 'c')
 		ft_printf("rr%c\n", c);
-	else
-		ft_printf("rrr\n");
 }
-/* Goal : Swap the first two elements 
-*/
+
+/* Goal : Swap the first two elements*/
 void	ft_swap(t_stack **stack, char c)
 {
 	int	head_content;
@@ -50,16 +46,15 @@ void	ft_swap(t_stack **stack, char c)
 	(*stack)->next->index = head_index;
 	if (c != 'c')
 		ft_printf("s%c\n", c);
-	else
-		ft_printf("ss\n");
 }
+
 /* Goal : Push a node from a stack to another one.
 To do so, I save my node in a swap_value variable.
 I rm the node in the src stack.
 I push the node into the dst stack */
 void	push_into_stack(t_stack **src, t_stack **dst, char c)
 {
-	t_stack *swap_value;
+	t_stack	*swap_value;
 
 	swap_value = *src;
 	rm_node(src);

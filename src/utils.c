@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:41:16 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/29 18:20:48 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/31 14:00:11 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	rm_node(t_stack **stack)
 	if (!*stack)
 		return ;
 	node_to_remove = *stack;
-	// If removing the only element in the stack
 	if (node_to_remove->next == node_to_remove)
 		*stack = NULL;
 	else
@@ -41,6 +40,7 @@ void	rm_node(t_stack **stack)
 		*stack = node_to_remove->next;
 	}
 }
+
 /* Pretty self explanatory */
 int	size_of_list(t_stack **stack)
 {
@@ -59,42 +59,53 @@ int	size_of_list(t_stack **stack)
 	return (size);
 }
 
-int	check_stack(t_stack **stack)
+void	ft_free_args(char **res)
 {
+	int	i;
+
+	i = 0;
+	while (res[i])
+	{
+		free(res[i]);
+		res[i] = NULL;
+		i++;
+	}
+	free(res);
+}
+
+void	max_index_in_b(t_stack **stack_b, t_data *data)
+{
+	int		len;
 	t_stack	*temp;
-	t_stack	*check;
 
-	temp = *stack;
-	check = (*stack)->next;
-	printf("check : %d\n", check->content);
-	printf("temp : %d\n", temp->content);
-	if (size_of_list(stack) == 2)
-		return (SUCCESS);
+	len = 0;
+	temp = *stack_b;
+	data->max = INT_MIN;
 	while (1)
 	{
-		printf("check : %d\n", check->content);
-		printf("temp : %d\n", temp->content);
-		if (temp->content == check->content)
-			return (print_error(), ERROR);
+		if (temp->index > data->max)
+		{
+			data->max = temp->index;
+			data->max_pos = len;
+		}
+		len++;
 		temp = temp->next;
-		check = check->next;
-		if (temp == *stack || check == (*stack)->next)
-			break ;
-	}
-	return (SUCCESS);
-}
-
-// a supprimer avant de push
-void	ft_print_list(t_stack **stack)
-{
-	t_stack *temp;
-
-	temp = *stack;
-	while (1)
-	{
-		printf("c : %d || i : %d\n", temp->content, temp->index);
-		temp = temp->next;
-		if (temp == *stack)
+		if (temp == *stack_b)
 			break ;
 	}
 }
+
+// // a supprimer avant de push
+// void	ft_print_list(t_stack **stack)
+// {
+// 	t_stack	*temp;
+
+// 	temp = *stack;
+// 	while (1)
+// 	{
+// 		printf("c : %d || i : %d\n", temp->content, temp->index);
+// 		temp = temp->next;
+// 		if (temp == *stack)
+// 			break ;
+// 	}
+// }

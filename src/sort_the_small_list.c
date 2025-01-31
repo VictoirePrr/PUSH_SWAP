@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:05:04 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/28 12:44:20 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/31 13:55:23 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,14 @@ void	sort_the_small_list(t_stack **stack_a, t_stack **stack_b)
 			push_into_stack(stack_b, stack_a, 'a');
 	}
 }
+
 void	search_smallest_small_list(t_stack **stack, t_data *data)
 {
 	t_stack	*temp;
 	int		len;
 
 	temp = *stack;
-	data->min = temp->content;
+	data->min = INT_MAX;
 	len = 0;
 	while (1)
 	{

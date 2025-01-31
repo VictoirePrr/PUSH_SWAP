@@ -6,16 +6,25 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 12:52:14 by vicperri          #+#    #+#             */
-/*   Updated: 2024/11/15 14:14:01 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/31 10:11:53 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isdigit(int c)
+int	ft_isdigit(char *c)
 {
-	if (!(c >= '0' && c <= '9'))
-		return (0);
-	else
-		return (1);
+	int	i;
+
+	i = 0;
+	while (c[i])
+	{
+		if (c[i] == '-' || c[i] == '+')
+			i++;
+		else if (!(c[i] >= '0' && c[i] <= '9'))
+			return (1);
+		else
+			i++;
+	}
+	return (0);
 }

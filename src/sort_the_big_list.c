@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:59:04 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/28 15:25:26 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/31 13:57:56 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	sort_the_big_list(t_stack **stack_a, t_stack **stack_b)
 	t_data	data;
 	int		size_a;
 
-	data.min = 0;
 	data.index = 0;
 	data.chunk_size = 0;
 	size_a = size_of_list(stack_a);
@@ -36,35 +35,48 @@ void	sort_the_big_list(t_stack **stack_a, t_stack **stack_b)
 	korean_algo(stack_a, stack_b, &data);
 	if (size_of_list(stack_a) == 3)
 		sort_three(stack_a);
-	push_b_in_a_korean_way(stack_a, stack_b, size_a);
+	push_b_in_a_korean_way(stack_a, stack_b, size_a, &data);
 }
 
-/*Goal : push into stack_b my nodes depending on their index so that I can do a first sort between them.
+/*Goal : push into stack_b my nodes depending on
+their index so that I can do a first sort between them.
 To do so : until my stack_a is equal to three,
-I will push into stack_b each node's index that corresponds to the size of the chunk
-I will then, if it is the case, increase the size of my chunk.
-For exemple : with a chunk of size 30 I will take the first node's index that is between 0 and 30 and push it into B,
+I will push into stack_b each node's index that corresponds to
+the size of the chunk. I will then, if it is the case,
+increase the size of my chunk.
+For exemple : with a chunk of size 30 I will take the first node's index
+that is between 0 and 30 and push it into B,
 I will then increase my chunk to 31 until the list A is a size of 3 nodes */
 void	korean_algo(t_stack **stack_a, t_stack **stack_b, t_data *data)
 {
 	int	index_max;
+	int	count;
 
 	index_max = size_of_list(stack_a) - 3;
+	count = 0;
 	while (size_of_list(stack_a) != 3)
 	{
-		if ((*stack_a)->index <= data->chunk_size
-			&& (*stack_a)->index < index_max)
+		if ((*stack_a)->index <= count && (*stack_a)->index < index_max)
 		{
 			push_into_stack(stack_a, stack_b, 'b');
-			data->chunk_size++;
+			count++;
 		}
-		if (size_of_list(stack_a) != 3)
+		else if ((*stack_a)->index < (count + data->chunk_size)
+			&& (*stack_a)->index < index_max)
+		{
+			sort_next_head(stack_a, stack_b, data, count);
+			count++;
+		}
+		else
 			rotate_next(stack_a, 'a');
 	}
 }
 
-void	push_b_in_a_korean_way(t_stack **stack_a, t_stack **stack_b, int size_a)
+void	push_b_in_a_korean_way(t_stack **stack_a, t_stack **stack_b, int size_a,
+		t_data *data)
 {
+	int	size_b;
+
 	while (size_of_list(stack_a) != size_a)
 	{
 		if ((*stack_b)->index == (*stack_a)->index - 1
@@ -74,8 +86,15 @@ void	push_b_in_a_korean_way(t_stack **stack_a, t_stack **stack_b, int size_a)
 			push_into_stack(stack_b, stack_a, 'a');
 			sort_stack_a_korean_way(stack_a);
 		}
-		else
-			rotate_prev(stack_b, 'b');
+		else if ((*stack_b)->index != data->max)
+		{
+			size_b = size_of_list(stack_b);
+			max_index_in_b(stack_b, data);
+			if (data->max_pos > size_b / 2)
+				rotate_prev(stack_b, 'b');
+			else
+				rotate_next(stack_b, 'b');
+		}
 	}
 }
 
@@ -91,4 +110,18 @@ void	sort_stack_a_korean_way(t_stack **stack_a)
 		while ((*stack_a)->prev->index == (*stack_a)->index - 1)
 			rotate_prev(stack_a, 'a');
 	}
+}
+
+void	sort_next_head(t_stack **stack_a, t_stack **stack_b, t_data *data,
+		int count)
+{
+	push_into_stack(stack_a, stack_b, 'b');
+	if ((*stack_a)->index >= count)
+	{
+		rotate_next(stack_a, 'c');
+		rotate_next(stack_b, 'c');
+		ft_printf("rr\n");
+	}
+	else
+		rotate_next(stack_b, 'b');
 }

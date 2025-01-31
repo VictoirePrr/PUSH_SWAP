@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:28:17 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/29 18:23:27 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/31 13:51:12 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@
 typedef struct s_data
 {
 	int				min_pos;
+	int				max_pos;
 	int				min;
+	int				max;
 	int				index;
 	float			chunk_size;
 }					t_data;
@@ -46,12 +48,13 @@ typedef struct s_stack
 // init the list
 void				rot_lstadd_back(t_stack **stack, t_stack *new_node);
 void				rot_lstadd_front(t_stack **stack, t_stack *new_node);
-int					fill_and_check_the_list(int content, t_stack **stack);
+int					fill_and_check_the_list(long content, t_stack **stack);
 t_stack				*stack_init(int content);
 
 // push_swap.c
 int					main(int argc, char **argv);
 int					split_and_list_argv(int argc, char **argv, t_stack **stack);
+int					check_stack(t_stack **stack);
 
 // sort_the_small_list
 void				sort_the_small_list(t_stack **stack_a, t_stack **stack_b);
@@ -69,21 +72,23 @@ void				rotate_prev(t_stack **stack, char c);
 void				print_error(void);
 void				rm_node(t_stack **stack);
 void				ft_print_list(t_stack **stack);
+void				ft_free_args(char **res);
 int					size_of_list(t_stack **stack);
-int					check_stack(t_stack **stack);
 
 // big_list_utils
 void				search_sort_index(t_stack **stack, t_data *data);
 void				set_index(t_stack **stack);
 void				compute_chunks(t_stack **stack, t_data *data);
-int					check_if_node_processed(t_stack **stack);
 void				search_smallest_big_list(t_stack **stack, t_data *data);
+int					check_if_node_processed(t_stack **stack);
 
 // sort_the_big_list
 void				sort_the_big_list(t_stack **stack_a, t_stack **stack_b);
 void				korean_algo(t_stack **stack, t_stack **stack_b,
 						t_data *data);
 void				push_b_in_a_korean_way(t_stack **stack_a, t_stack **stack_b,
-						int size_a);
+						int size_a, t_data *data);
 void				sort_stack_a_korean_way(t_stack **stack_a);
+void				max_index_in_b(t_stack **stack_b, t_data *data);
+
 #endif
