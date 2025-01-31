@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:59:04 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/31 13:57:56 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/31 14:59:16 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	korean_algo(t_stack **stack_a, t_stack **stack_b, t_data *data)
 		else if ((*stack_a)->index < (count + data->chunk_size)
 			&& (*stack_a)->index < index_max)
 		{
-			sort_next_head(stack_a, stack_b, data, count);
+			sort_next_head(stack_a, stack_b, count);
 			count++;
 		}
 		else
@@ -112,8 +112,7 @@ void	sort_stack_a_korean_way(t_stack **stack_a)
 	}
 }
 
-void	sort_next_head(t_stack **stack_a, t_stack **stack_b, t_data *data,
-		int count)
+void	sort_next_head(t_stack **stack_a, t_stack **stack_b, int count)
 {
 	push_into_stack(stack_a, stack_b, 'b');
 	if ((*stack_a)->index >= count)

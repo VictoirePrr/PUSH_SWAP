@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:41:16 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/31 14:00:11 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/31 17:20:29 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	rm_node(t_stack **stack)
 	}
 }
 
-/* Pretty self explanatory */
 int	size_of_list(t_stack **stack)
 {
 	t_stack	*temp;
@@ -95,17 +94,17 @@ void	max_index_in_b(t_stack **stack_b, t_data *data)
 	}
 }
 
-// // a supprimer avant de push
-// void	ft_print_list(t_stack **stack)
-// {
-// 	t_stack	*temp;
+// a supprimer avant de push
+void	ft_print_list(t_stack **stack)
+{
+	t_stack	*temp;
 
-// 	temp = *stack;
-// 	while (1)
-// 	{
-// 		printf("c : %d || i : %d\n", temp->content, temp->index);
-// 		temp = temp->next;
-// 		if (temp == *stack)
-// 			break ;
-// 	}
-// }
+	temp = *stack;
+	while (1)
+	{
+		printf("c : %d || i : %d\n", temp->content, temp->index);
+		temp = temp->next;
+		if (temp == *stack)
+			break ;
+	}
+}

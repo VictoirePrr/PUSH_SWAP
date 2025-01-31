@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:28:17 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/31 13:51:12 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/01/31 17:21:08 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,10 @@ void				rotate_prev(t_stack **stack, char c);
 // utils
 void				print_error(void);
 void				rm_node(t_stack **stack);
-void				ft_print_list(t_stack **stack);
 void				ft_free_args(char **res);
+void				max_index_in_b(t_stack **stack_b, t_data *data);
 int					size_of_list(t_stack **stack);
+void				ft_print_list(t_stack **stack);
 
 // big_list_utils
 void				search_sort_index(t_stack **stack, t_data *data);
@@ -89,6 +90,7 @@ void				korean_algo(t_stack **stack, t_stack **stack_b,
 void				push_b_in_a_korean_way(t_stack **stack_a, t_stack **stack_b,
 						int size_a, t_data *data);
 void				sort_stack_a_korean_way(t_stack **stack_a);
-void				max_index_in_b(t_stack **stack_b, t_data *data);
+void				sort_next_head(t_stack **stack_a, t_stack **stack_b,
+						int count);
 
 #endif
