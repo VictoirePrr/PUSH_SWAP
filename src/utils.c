@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:41:16 by vicperri          #+#    #+#             */
-/*   Updated: 2025/02/03 12:27:11 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/02/03 13:50:59 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,11 @@ void	ft_free_args(char **res)
 	}
 	free(res);
 }
-
+/*Goal : search for the biggest num in my list.
+To do so, I interate through my stack with temp and compare the content of
+my nodes to data->max which is first equal to the MIN INT.
+If my temp is bigger than data->max, data->max will now be equal to temp.
+I also take advantage of this iteration to retrive the position of the biggest node.*/
 void	max_index_in_b(t_stack **stack_b, t_data *data)
 {
 	int		len;

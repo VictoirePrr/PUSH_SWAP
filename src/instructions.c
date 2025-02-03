@@ -6,12 +6,16 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:40:24 by vicperri          #+#    #+#             */
-/*   Updated: 2025/02/03 11:38:43 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/02/03 13:39:18 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/*Goal : move my head at the end of the list.
+To do so, I check if my head is not equal to
+the next node (for the case of a list of 1 elements).
+If not, I move my the next value to be my head*/
 void	rotate_next(t_stack **stack, char c)
 {
 	if ((*stack)->next == *stack)
@@ -21,7 +25,9 @@ void	rotate_next(t_stack **stack, char c)
 	if (c != 'c')
 		ft_printf("r%c\n", c);
 }
-
+/*Goal : move the last node at the head of the list.
+same as rotate next but this time to the last node
+will be my head. */
 void	rotate_prev(t_stack **stack, char c)
 {
 	if ((*stack)->prev == *stack)
@@ -32,7 +38,9 @@ void	rotate_prev(t_stack **stack, char c)
 		ft_printf("rr%c\n", c);
 }
 
-/* Goal : Swap the first two elements*/
+/* Goal : Swap the first two elements
+To do so, I swap the values between the two nodes,
+as well as the index. */
 void	ft_swap(t_stack **stack, char c)
 {
 	int	head_content;

@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:30:18 by vicperri          #+#    #+#             */
-/*   Updated: 2025/02/03 12:46:24 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/02/03 16:55:20 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ void	ft_free_list(t_stack **stack)
 	}
 	*stack = NULL;
 }
-
+/*Goal : Check for doubles inside the stack.
+ To do so, I check if the list is equal to a size of 2.
+ Then I loop inside my stack with a temp and a check, while I am on
+ the head I loop through the list, if I find a double :
+ I return ERROR.*/
 int	check_stack(t_stack **stack)
 {
 	t_stack	*temp;
@@ -56,7 +60,12 @@ int	check_stack(t_stack **stack)
 	}
 	return (SUCCESS);
 }
-
+/*Goal : check arguments for mistakes and list the numbers into stack.
+To do so, I do a split on my argvs and store it into a tab of tab
+'args'. Then I loop in my args and check if I only have numbers,
+if so; I atoi them and insert them into a stack. While being inserted into
+the stack I check for doubles. I free when needed and if everything works
+I return SUCCESS ! */
 int	split_and_list_argv(int argc, char **argv, t_stack **stack)
 {
 	int		j;
@@ -89,7 +98,10 @@ int	split_and_list_argv(int argc, char **argv, t_stack **stack)
 int	ft_push_swap(t_stack **stack_a, t_stack **stack_b)
 {
 	if (size_of_list(stack_a) == 1)
-		return (ft_free_list(stack_a), SUCCESS);
+	{
+		ft_free_list(stack_a);
+		return (SUCCESS);
+	}
 	if (size_of_list(stack_a) == 2)
 	{
 		if ((*stack_a)->content > (*stack_a)->next->content)
@@ -111,10 +123,17 @@ int	main(int argc, char **argv)
 	stack_a = NULL;
 	stack_b = NULL;
 	if (argc == 1)
-		return (SUCCESS);
+	{
+		print_error();
+		return (ERROR);
+	}
 	if (split_and_list_argv(argc, argv, &stack_a) == ERROR)
-		return (ft_free_list(&stack_a), print_error(), ERROR);
-	if (is_sorted(&stack_a) == ERROR)
+	{
+		ft_free_list(&stack_a);
+		print_error();
+		return (ERROR);
+	}
+	if (is_sorted(&stack_a) == 1)
 		ft_push_swap(&stack_a, &stack_b);
 	else
 		ft_free_list(&stack_a);
