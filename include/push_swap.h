@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:28:17 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/31 17:21:08 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/02/03 11:30:13 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ t_stack				*stack_init(int content);
 
 // push_swap.c
 int					main(int argc, char **argv);
+int					ft_push_swap(t_stack **stack_a, t_stack **stack_b);
 int					split_and_list_argv(int argc, char **argv, t_stack **stack);
 int					check_stack(t_stack **stack);
+void				ft_free_list(t_stack **stack);
 
 // sort_the_small_list
 void				sort_the_small_list(t_stack **stack_a, t_stack **stack_b);
@@ -67,6 +69,7 @@ void				push_into_stack(t_stack **src, t_stack **dst, char c);
 void				ft_swap(t_stack **stack, char c);
 void				rotate_next(t_stack **stack, char c);
 void				rotate_prev(t_stack **stack, char c);
+int					is_sorted(t_stack **stack);
 
 // utils
 void				print_error(void);

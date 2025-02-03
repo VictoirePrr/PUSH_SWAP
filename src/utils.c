@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:41:16 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/31 17:20:29 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/02/03 12:27:11 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_error(void)
 {
-	ft_printf("Error\n");
+	write(2, "Error\n", 6);
 }
 
 /* Goal : Removes the current node from a circular doubly linked list.
@@ -90,21 +90,6 @@ void	max_index_in_b(t_stack **stack_b, t_data *data)
 		len++;
 		temp = temp->next;
 		if (temp == *stack_b)
-			break ;
-	}
-}
-
-// a supprimer avant de push
-void	ft_print_list(t_stack **stack)
-{
-	t_stack	*temp;
-
-	temp = *stack;
-	while (1)
-	{
-		printf("c : %d || i : %d\n", temp->content, temp->index);
-		temp = temp->next;
-		if (temp == *stack)
 			break ;
 	}
 }

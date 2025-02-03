@@ -6,14 +6,15 @@
 #    By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/12 12:55:24 by vicperri          #+#    #+#              #
-#    Updated: 2025/01/22 10:59:13 by vicperri         ###   ########lyon.fr    #
+#    Updated: 2025/02/03 13:07:39 by vicperri         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME    =  push_swap
 
-CC := gcc
-CCFLAGS := -g3
+CC := cc
+CPPFLAGS = -MMD -MP
+CCFLAGS := -Wall -Wextra -Werror -g3
 SRC_DIR := src/
 INCLUDES:= include/
 SRC := $(addprefix $(SRC_DIR), init_the_list.c instructions.c push_swap.c utils.c \
@@ -21,6 +22,8 @@ SRC := $(addprefix $(SRC_DIR), init_the_list.c instructions.c push_swap.c utils.
 
 OBJ_DIR := .obj/
 OBJ := $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+
+DEPS := $(OBJ:%.o=%.d)
 
 LIBFT_DIR := libft/
 LIBFT := $(LIBFT_DIR)libft.a 
@@ -41,19 +44,22 @@ CYAN = \033[0;96m
 WHITE = \033[0;97m
 PURPLE=\033[35m
 
-$(NAME): $(OBJ)
-	$(MAKE) -C $(LIBFT_DIR)
+all: $(NAME)
+
+$(NAME): $(LIBFT) $(OBJ)
 	$(CC) $(CCFLAGS) $(OBJ) $(LIBFT_FLAG) -o $(NAME)
-	$(CC) $(CCFLAGS) $(OBJ) $(LIBFT_FLAG) -o $(NAME)
-	 @echo "$(PURPLE) ✨ SO_LONG COMPILED ✨$(DEF_COLOR)"
+	 @echo "$(PURPLE) ✨ $(NAME) compiled ✨$(DEF_COLOR)"
 	$(MAKE) kitty
 	
-all: $(NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
 	@echo "$(BLUE)...Compiling...: $< $(DEF_COLOR)"
-	$(CC) $(CCFLAGS) $(HEADERS) -c $< -o $@
+	$(CC) $(CCFLAGS) $(CPPFLAGS) $(HEADERS) -c $< -o $@
+$(LIBFT): libft
+
+libft:
+	$(MAKE) -C $(LIBFT_DIR)
 
 kitty:
 	@echo									⠀⠀⠀⠀⠀⠀⢀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -82,10 +88,14 @@ clean:
 
 fclean: clean
 	$(MAKE) fclean -C $(LIBFT_DIR)
-	@echo "$(YELLOW) 🧽 SO_LONG SUCCESSFULLY CLEANED 🧽 $(DEF_COLOR)"
+	@echo "$(YELLOW) 🧽 $(NAME) successfully cleaned 🧽 $(DEF_COLOR)"
 	$(MAKE) kitty
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re kitty
+info:
+	@echo "DEPS": $(DEPS)
+-include $(DEPS)
+
+.PHONY: all clean fclean re libft kitty

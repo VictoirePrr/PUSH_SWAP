@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:40:24 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/31 13:55:06 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/02/03 11:38:43 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,18 @@ void	push_into_stack(t_stack **src, t_stack **dst, char c)
 		return ;
 	rot_lstadd_front(dst, swap_value);
 	ft_printf("p%c\n", c);
+}
+
+int	is_sorted(t_stack **stack)
+{
+	t_stack	*temp;
+
+	temp = *stack;
+	while (temp->next != *stack)
+	{
+		if (temp->content > temp->next->content)
+			return (ERROR);
+		temp = temp->next;
+	}
+	return (SUCCESS);
 }

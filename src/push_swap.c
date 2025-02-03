@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:30:18 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/31 17:49:52 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/02/03 12:46:24 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ void	ft_free_list(t_stack **stack)
 	t_stack	*temp;
 	int		size;
 
+	if (!*stack)
+		return ;
 	size = size_of_list(stack);
-	while (size > 0)
+	while (size != 0)
 	{
 		temp = (*stack)->next;
 		free(*stack);
@@ -72,15 +74,32 @@ int	split_and_list_argv(int argc, char **argv, t_stack **stack)
 		while (args[j])
 		{
 			if (ft_isdigit(args[j]) == ERROR)
-				return (ERROR);
+				return (ft_free_args(args), ERROR);
 			num = ft_atoi(args[j]);
 			if (fill_and_check_the_list(num, stack) == ERROR)
-				return (ERROR);
+				return (ft_free_args(args), ERROR);
 			j++;
 		}
 		ft_free_args(args);
 		i++;
 	}
+	return (SUCCESS);
+}
+
+int	ft_push_swap(t_stack **stack_a, t_stack **stack_b)
+{
+	if (size_of_list(stack_a) == 1)
+		return (ft_free_list(stack_a), SUCCESS);
+	if (size_of_list(stack_a) == 2)
+	{
+		if ((*stack_a)->content > (*stack_a)->next->content)
+			rotate_next(stack_a, 'a');
+	}
+	else if (size_of_list(stack_a) <= 12)
+		sort_the_small_list(stack_a, stack_b);
+	else if (size_of_list(stack_a) > 12)
+		sort_the_big_list(stack_a, stack_b);
+	ft_free_list(stack_a);
 	return (SUCCESS);
 }
 
@@ -91,23 +110,13 @@ int	main(int argc, char **argv)
 
 	stack_a = NULL;
 	stack_b = NULL;
-	if (split_and_list_argv(argc, argv, &stack_a) == ERROR)
-		return (print_error(), ERROR);
-	// ft_free_list(&stack_a)
-	if (size_of_list(&stack_a) == 1)
+	if (argc == 1)
 		return (SUCCESS);
-	// ft_free_list(&stack_a),
-	if (size_of_list(&stack_a) == 2)
-	{
-		if (stack_a->content > stack_a->next->content)
-			rotate_next(&stack_a, 'a');
-	}
-	else if (size_of_list(&stack_a) <= 12)
-		sort_the_small_list(&stack_a, &stack_b);
-	else if (size_of_list(&stack_a) > 12)
-		sort_the_big_list(&stack_a, &stack_b);
-	// ft_free_list(&stack_a);
-	// ft_free_list(&stack_b);
-	//+ error quand double chaine trie au depard
+	if (split_and_list_argv(argc, argv, &stack_a) == ERROR)
+		return (ft_free_list(&stack_a), print_error(), ERROR);
+	if (is_sorted(&stack_a) == ERROR)
+		ft_push_swap(&stack_a, &stack_b);
+	else
+		ft_free_list(&stack_a);
 	return (SUCCESS);
 }

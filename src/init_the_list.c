@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:44:49 by vicperri          #+#    #+#             */
-/*   Updated: 2025/01/31 13:58:33 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/02/03 12:38:16 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	fill_and_check_the_list(long content, t_stack **stack)
 {
 	t_stack	*new_node;
 
-	if (content >= 2147483647)
+	if (content > 2147483647 || content < -2147483648)
 		return (ERROR);
 	new_node = stack_init((int)content);
 	if (!new_node)
