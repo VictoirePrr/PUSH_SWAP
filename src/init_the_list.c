@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:44:49 by vicperri          #+#    #+#             */
-/*   Updated: 2025/02/03 13:26:21 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/02/04 13:49:17 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	rot_lstadd_back(t_stack **stack, t_stack *new_node)
 		(*stack)->prev = new_node;
 	}
 }
+
 /* Goal : add a new node at the head of the node.
 To do so,
 I check if the stack is empty;
@@ -68,6 +69,7 @@ void	rot_lstadd_front(t_stack **stack, t_stack *new_node)
 		*stack = new_node;
 	}
 }
+
 /*Goal : init my node.
 To do so, I malloc a stack and init the variables.
 Next and prev will be equal to NULL for now.*/
@@ -83,6 +85,7 @@ t_stack	*stack_init(int content)
 	new_node->prev = NULL;
 	return (new_node);
 }
+
 /*Goal : Add a new node to my stack.
 To do so, I first check the content of my node forlimits of int
 Then I initialize my node and check if stack exists.

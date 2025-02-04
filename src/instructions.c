@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:40:24 by vicperri          #+#    #+#             */
-/*   Updated: 2025/02/03 13:39:18 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/02/04 13:47:51 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	rotate_next(t_stack **stack, char c)
 	if (c != 'c')
 		ft_printf("r%c\n", c);
 }
+
 /*Goal : move the last node at the head of the list.
 same as rotate next but this time to the last node
 will be my head. */

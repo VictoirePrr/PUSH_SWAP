@@ -6,6 +6,7 @@
         "random": "c",
         "limits": "c",
         "algorithm": "c",
-        "variant": "c"
+        "variant": "c",
+        "ranges": "c"
     }
 }

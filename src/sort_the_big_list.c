@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:59:04 by vicperri          #+#    #+#             */
-/*   Updated: 2025/02/03 17:26:51 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/02/04 13:49:02 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ void	sort_the_big_list(t_stack **stack_a, t_stack **stack_b)
 /*Goal : push into stack_b my nodes depending on
 their index so that I can do a first sort between them.
 To do so : until my stack_a is equal to three,
-In my first 'if' I will push into stack_b each node's index that are smaller than count.
-In my second 'if' I will do a special sort for bigger indexes (smaller than my chunk_size
-	+ count).
+In my first 'if' I will push into stack_b each node's
+index that are smaller than count.
+In my second 'if' I will do a special sort for 
+bigger indexes (smaller than my chunk_size + count).
 For exemple : with a chunk of size 30 I will take the first node's index
 that is smaller than count and push into B, or the  first node's index
 that is smaller than count + chunk_size and sort it in a special way.*/
@@ -71,6 +72,7 @@ void	korean_algo(t_stack **stack_a, t_stack **stack_b, t_data *data)
 			rotate_next(stack_a, 'a');
 	}
 }
+
 /* Goal : push B into A and final sort.
 To do so, I iterate in stack_a until it is equal to the initial size of A.
 I then check if my index at the head of B is sorted with the head of A or
@@ -104,6 +106,7 @@ void	push_b_in_a_korean_way(t_stack **stack_a, t_stack **stack_b, int size_a,
 		}
 	}
 }
+
 /* Goal : sort stack A once B pushed a node.
 To do so, I check if the index of the head is sorted.
 If not I will ra to put the node at the end of the stack.
@@ -122,6 +125,7 @@ void	sort_stack_a_korean_way(t_stack **stack_a)
 			rotate_prev(stack_a, 'a');
 	}
 }
+
 /* Goal : sort the new head after pushing the old head
 (smaller than count + chunk_size) into B.
 To do so, I check if the head is bigger than count.

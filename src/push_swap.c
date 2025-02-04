@@ -6,7 +6,7 @@
 /*   By: vicperri <vicperri@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:30:18 by vicperri          #+#    #+#             */
-/*   Updated: 2025/02/03 16:55:20 by vicperri         ###   ########lyon.fr   */
+/*   Updated: 2025/02/04 13:49:37 by vicperri         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_free_list(t_stack **stack)
 	}
 	*stack = NULL;
 }
+
 /*Goal : Check for doubles inside the stack.
  To do so, I check if the list is equal to a size of 2.
  Then I loop inside my stack with a temp and a check, while I am on
@@ -60,6 +61,7 @@ int	check_stack(t_stack **stack)
 	}
 	return (SUCCESS);
 }
+
 /*Goal : check arguments for mistakes and list the numbers into stack.
 To do so, I do a split on my argvs and store it into a tab of tab
 'args'. Then I loop in my args and check if I only have numbers,
